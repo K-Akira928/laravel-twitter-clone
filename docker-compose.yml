@@ -42,3 +42,10 @@ services:
     container_name: "l10dev-redis"
     ports:
       - 16379:6379
+
+  mail:
+    image: axllent/mailpit:v1.8
+    container_name: mailpit
+    ports:
+      - 8025:8025
+      - 1025:1025
