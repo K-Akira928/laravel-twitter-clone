@@ -47,7 +47,7 @@
                     </div>
 
                     <div class="relative">
-                        <x-forms.input-label value="パスワード" name="password" />
+                        <x-forms.input-label value="パスワード" name="password" type="password" />
                         <div class="absolute -bottom-5">
                             <x-forms.error name="password" />
                         </div>
