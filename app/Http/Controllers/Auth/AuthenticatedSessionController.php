@@ -27,6 +27,17 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        if (!Auth::user()->hasVerifiedEmail()) {
+            Auth::user()->sendEmailVerificationNotification();
+            Auth::guard('web')->logout();
+            $request->session()->regenerate();
+            return redirect()->route('login')
+                ->with([
+                    'status' => 'alert',
+                    'message' => 'メールアドレスの本人確認が必要です。'
+                ]);
+        }
+
         $request->session()->regenerate();
 
         return redirect()->intended(RouteServiceProvider::HOME);
