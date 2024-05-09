@@ -11,6 +11,8 @@ use Laravel\Sanctum\HasApiTokens;
 
 use App\Notifications\VerifyEmailNotification;
 
+use App\Models\Tweet;
+
 class User extends Authenticatable implements MustVerifyEmailContract
 {
     use HasApiTokens, HasFactory, Notifiable, MustVerifyEmail;
@@ -51,5 +53,10 @@ class User extends Authenticatable implements MustVerifyEmailContract
     public function sendEmailVerificationNotification()
     {
         $this->notify(new VerifyEmailNotification);
+    }
+
+    public function tweets()
+    {
+        return $this->hasMany(Tweet::class);
     }
 }
