@@ -5,6 +5,7 @@
     <x-slot name="mainContents">
         <x-commons.main-contents>
             <x-slot name="contents">
+                <x-tweets.tweet-form />
             </x-slot>
         </x-commons.main-contents>
     </x-slot>
