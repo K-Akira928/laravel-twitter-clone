@@ -4,7 +4,7 @@
             href="{{ route('home') }}">
             <img class="size-[35px]" src="{{ asset('icon.svg') }}" alt="ロゴ画像">
         </a>
-        <a class="h-[50px]" href="#">
+        <a class="h-[50px]" href="{{ route('home') }}">
             <div class="h-full w-fit flex items-center gap-x-3 px-5 hover:bg-gray-900 rounded-full transition">
                 <svg class="h-8 w-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="{{ request()->routeIs('home') ? '2' : '1' }}" stroke-linecap="round"
