@@ -56,4 +56,22 @@ class TweetController extends Controller
         }
         return redirect()->route('home');
     }
+
+    public function destroy(string $id)
+    {
+        $tweet = Tweet::findOrFail($id);
+        $images = $tweet->images()->get();
+
+        if (!(int)$tweet->user()->first()->id === Auth::id()) {
+            return redirect()->route('home');
+        }
+
+        if (!empty($images)) {
+            foreach ($images as $image)
+                Storage::disk('public')->delete('tweet_images/' . $image->filename);
+        }
+        $tweet->delete();
+
+        return redirect()->route('home');
+    }
 }
