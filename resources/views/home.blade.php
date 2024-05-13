@@ -6,6 +6,9 @@
         <x-commons.main-contents>
             <x-slot name="contents">
                 <x-tweets.tweet-form />
+                @foreach ($tweets as $tweet)
+                    <x-tweets.tweet-card :tweet="$tweet" />
+                @endforeach
             </x-slot>
         </x-commons.main-contents>
     </x-slot>

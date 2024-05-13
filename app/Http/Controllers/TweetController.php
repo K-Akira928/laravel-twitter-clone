@@ -20,7 +20,9 @@ class TweetController extends Controller
 {
     public function index(): View
     {
-        return view('home');
+        $tweets = Tweet::with(['user', 'images'])->orderBy('created_at', 'desc')->get();
+
+        return view('home', compact('tweets'));
     }
 
     public function store(TweetRequest $request)
