@@ -1,4 +1,4 @@
-@if (request()->routeIs('home'))
+@if (request()->routeIs(['home', 'tweets.show']))
     <div class="bg-black sticky top-0 py-1">
         <div class="h-[45px] px-5 flex items-center bg-gray-500 bg-opacity-50 rounded-full hover:cursor-text">
             <svg class="size-[20px] text-gray-500" width="24" height="24" viewBox="0 0 24 24" stroke-width="1"
