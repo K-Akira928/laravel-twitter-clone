@@ -5,11 +5,35 @@
         class="absolute size-full hover:bg-gray-500 hover:bg-opacity-20 transition top-0 left-0"></button>
     <div class="flex">
         <img class="size-[40px] object-cover rounded-full" src="{{ asset('icon.svg') }}" alt="">
-        <div class="ml-3">
-            <div>
-                <a href="#" class="font-bold text-lg relative z-10 hover:underline">{{ $tweet->user->name }}</a>
-                <span
-                    class="text-gray-500 ml-2 relative z-10 hover:underline hover:cursor-pointer">{{ '@' . $tweet->user->username }}</span>
+        <div class="w-full ml-3">
+            <div class="w-full flex justify-between">
+                <div>
+                    <a href="#"
+                        class="font-bold text-lg relative z-10 hover:underline">{{ $tweet->user->name }}</a>
+                    <span
+                        class="text-gray-500 ml-2 relative z-10 hover:underline hover:cursor-pointer">{{ '@' . $tweet->user->username }}</span>
+                </div>
+                <div x-data="{
+                    open: false
+                }" @click="open = true"
+                    class="size-[28px] relative z-10 justify-center flex items-center rounded-full hover:cursor-pointer hover:bg-gray-500 hover:bg-opacity-30 transition">
+                    <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="1" />
+                        <circle cx="19" cy="12" r="1" />
+                        <circle cx="5" cy="12" r="1" />
+                    </svg>
+                    <div x-show="open" @click.away="open = false"
+                        class="absolute z-10 p-2 bg-black top-0 right-0 w-[200px] border rounded-lg">
+                        @if ($tweet->user->id === Auth::id())
+                            <form method="POST" action="{{ route('tweets.destroy', ['id' => $tweet->id]) }}">
+                                @csrf
+                                @method('DELETE')
+                                <button class="text-red-500 font-bold w-full">削除</button>
+                            </form>
+                        @endif
+                    </div>
+                </div>
             </div>
             <p class="whitespace-break-spaces">{{ $tweet->content }}</p>
             @if (!$tweet->images->isEmpty())
