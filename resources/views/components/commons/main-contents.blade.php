@@ -1,6 +1,6 @@
 @if (request()->routeIs('home'))
     <div
-        class="h-[53px] flex justify-between text-gray-500 border-b sticky top-0 bg-black bg-opacity-80 backdrop-blur-[1px]">
+        class="h-[53px] z-50 flex justify-between text-gray-500 border-b sticky top-0 bg-black bg-opacity-80 backdrop-blur-[1px]">
         <div
             class="w-[45%] flex justify-center items-center hover:bg-gray-900 hover:bg-opacity-40 hover:cursor-pointer transition">
             <span class="text-lg">
