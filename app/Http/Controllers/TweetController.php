@@ -26,6 +26,12 @@ class TweetController extends Controller
         return view('home', compact('tweets'));
     }
 
+    public function show(string $id): View
+    {
+        $tweet = Tweet::findOrFail($id);
+        return view('tweets.show', compact('tweet'));
+    }
+
     public function store(TweetRequest $request)
     {
         try {
