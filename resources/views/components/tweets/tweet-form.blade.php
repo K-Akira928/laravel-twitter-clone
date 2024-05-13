@@ -1,3 +1,5 @@
+@props(['reply' => false])
+
 <form x-ref="tweetForm" x-data="{
     textareaValue: '',
     textareaHeightChange() {
@@ -31,7 +33,7 @@
                 console.log(textareaWordCount())
                 "
                 class="w-full h-[44px] mb-5 flex items-center text-white bg-black text-2xl resize-none border-none focus:outline-none"
-                placeholder="いまどうしてる？" rows="1" name="content" id="content"></textarea>
+                placeholder={{ $reply ? '返信する' : 'いまどうしてる？' }} rows="1" name="content" id="content"></textarea>
             <template x-if="images.length">
                 <div class="grid grid-flow-col gap-x-1">
                     <template x-for="(image, i) in images">
@@ -78,7 +80,7 @@
                     x-text="textareaWordCount() + '/140'"></span>
                 <button type="button" @click="setInputImage(); $refs.tweetForm.submit();"
                     class="bg-orange-500 hover:bg-orange-600 disabled:bg-orange-700 px-5 py-1 rounded-full font-extrabold"
-                    :disabled="textareaWordCount() <= 0">ツイートする</button>
+                    :disabled="textareaWordCount() <= 0">{{ $reply ? '返信' : 'ツイートする' }}</button>
             </div>
         </div>
     </div>
