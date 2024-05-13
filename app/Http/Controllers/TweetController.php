@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Throwable;
+use Log;
 
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -31,6 +32,10 @@ class TweetController extends Controller
             DB::transaction(function () use ($request) {
                 $tweet = new Tweet(['content' => $request->content]);
                 $tweet = Auth::user()->tweets()->save($tweet);
+
+                if (empty($request->file('images'))) {
+                    return redirect()->route('home');
+                }
 
                 foreach ($request->file('images') as $image) {
                     $putFile = Storage::putFile('public/tweet_images', $image, 'public');
