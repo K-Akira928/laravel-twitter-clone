@@ -5,10 +5,8 @@
     <x-slot name="mainContents">
         <x-commons.main-contents>
             <x-slot name="contents">
-                <x-tweets.tweet-form />
-                @foreach ($tweets as $tweet)
-                    <x-tweets.tweet-card :tweet="$tweet" />
-                @endforeach
+                <x-tweets.tweet-card :tweet="$tweet" />
+                <x-tweets.tweet-form reply=true />
             </x-slot>
         </x-commons.main-contents>
     </x-slot>

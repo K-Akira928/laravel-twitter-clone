@@ -22,6 +22,10 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified:login'])->group(function () {
     Route::get('/home', [TweetController::class, 'index'])->name('home');
+    Route::get('/tweets/{id}', [TweetController::class, 'show'])->name('tweets.show');
+
+    Route::post('/tweets', [TweetController::class, 'store'])->name('tweets.store');
+    Route::delete('/tweets/{id}', [TweetController::class, 'destroy'])->name('tweets.destroy');
 });
 
 Route::middleware('auth')->group(function () {
