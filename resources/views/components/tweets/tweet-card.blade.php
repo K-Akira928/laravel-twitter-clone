@@ -1,7 +1,7 @@
 @props(['tweet'])
 
 <div class="w-full relative pt-4 pb-2 px-4 flex flex-col border-b border-gray-500">
-    <button type="button"
+    <button onclick="location.href='{{ route('tweets.show', ['id' => $tweet->id]) }}'" type="button"
         class="absolute size-full hover:bg-gray-500 hover:bg-opacity-20 transition top-0 left-0"></button>
     <div class="flex">
         <img class="size-[40px] object-cover rounded-full" src="{{ asset('icon.svg') }}" alt="">
