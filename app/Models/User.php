@@ -12,6 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Notifications\VerifyEmailNotification;
 
 use App\Models\Tweet;
+use App\Models\UserIcon;
 
 class User extends Authenticatable implements MustVerifyEmailContract
 {
@@ -58,5 +59,10 @@ class User extends Authenticatable implements MustVerifyEmailContract
     public function tweets()
     {
         return $this->hasMany(Tweet::class);
+    }
+
+    public function icon()
+    {
+        return $this->hasOne(UserIcon::class);
     }
 }

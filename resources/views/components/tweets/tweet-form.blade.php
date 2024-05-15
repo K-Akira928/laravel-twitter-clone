@@ -22,7 +22,13 @@
 }" class="w-full flex p-4 pb-2 border-b border-gray-500" method="POST"
     action="{{ route('tweets.store') }}" enctype="multipart/form-data">
     <div class="mr-3">
-        <img class="size-[40px] object-cover rounded-full" src="{{ asset('default_icon_user.png') }}" alt="デフォルトユーザーアイコン">
+        @if (Auth::user()->icon()->get()->isEmpty())
+            <img class="size-[40px] object-cover rounded-full" src="{{ asset('default_icon_user.png') }}"
+                alt="デフォルトユーザーアイコン">
+        @else
+            <img class="size-[40px] object-cover rounded-full"
+                src="{{ asset('storage/user_icons/' . Auth::user()->icon()->first()->filename) }}" alt="ユーザーアイコン">
+        @endif
     </div>
     @csrf
     <div class="w-full flex flex-col">
