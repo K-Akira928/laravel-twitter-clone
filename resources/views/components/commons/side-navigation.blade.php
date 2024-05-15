@@ -111,7 +111,8 @@
     <div
         class="w-[260px] h-[65px] flex justify-between items-center px-5 mb-4 hover:bg-gray-900 hover:cursor-pointer rounded-full transition">
         <div class="flex items-center gap-x-2">
-            <div class="size-[40px] flex justify-center items-center border rounded-full">IC</div>
+            <img class="size-[40px] object-cover rounded-full" src="{{ asset('default_icon_user.png') }}"
+                alt="デフォルトユーザーアイコン">
             <div>
                 <p class="font-bold">name</p>
                 <span class="text-gray-500">@ユーザー名</span>

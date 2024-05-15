@@ -22,7 +22,7 @@
 }" class="w-full flex p-4 pb-2 border-b border-gray-500" method="POST"
     action="{{ route('tweets.store') }}" enctype="multipart/form-data">
     <div class="mr-3">
-        <div class="size-[40px] flex justify-center items-center border rounded-full">IC</div>
+        <img class="size-[40px] object-cover rounded-full" src="{{ asset('default_icon_user.png') }}" alt="デフォルトユーザーアイコン">
     </div>
     @csrf
     <div class="w-full flex flex-col">
