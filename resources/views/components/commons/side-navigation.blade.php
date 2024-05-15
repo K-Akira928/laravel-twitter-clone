@@ -111,11 +111,17 @@
     <div
         class="w-[260px] h-[65px] flex justify-between items-center px-5 mb-4 hover:bg-gray-900 hover:cursor-pointer rounded-full transition">
         <div class="flex items-center gap-x-2">
-            <img class="size-[40px] object-cover rounded-full" src="{{ asset('default_icon_user.png') }}"
-                alt="デフォルトユーザーアイコン">
+            @if (Auth::user()->icon()->get()->isEmpty())
+                <img class="size-[40px] object-cover rounded-full" src="{{ asset('default_icon_user.png') }}"
+                    alt="デフォルトユーザーアイコン">
+            @else
+                <img class="size-[40px] object-cover rounded-full"
+                    src="{{ asset('storage/user_icons/' . Auth::user()->icon()->first()->filename) }}"
+                    alt="ユーザーアイコン">
+            @endif
             <div>
-                <p class="font-bold">name</p>
-                <span class="text-gray-500">@ユーザー名</span>
+                <p class="font-bold">{{ Auth::user()->name }}</p>
+                <span class="text-gray-500">{{ '@' . Auth::user()->username }}</span>
             </div>
         </div>
         <svg class="size-[20px] text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor"
