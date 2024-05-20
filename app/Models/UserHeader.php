@@ -11,4 +11,13 @@ class UserHeader extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'filename'
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
