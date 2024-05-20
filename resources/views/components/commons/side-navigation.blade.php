@@ -84,14 +84,14 @@
                 <span class="text-2xl">コミュニティ</span>
             </div>
         </a>
-        <a class="h-[50px]" href="#">
+        <a class="h-[50px]" href="{{ route('users.show', ['id' => Auth::id()]) }}">
             <div class="h-full w-fit flex items-center gap-x-3 px-5 hover:bg-gray-900 rounded-full transition">
                 <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round"
-                        stroke-width="{{ request()->routeIs('profiles') ? '2' : '1' }}"
+                        stroke-width="{{ request()->routeIs('users.show') ? '2' : '1' }}"
                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
-                <span class="text-2xl {{ request()->routeIs('profiles') ? 'font-extrabold' : '' }}">プロフィール</span>
+                <span class="text-2xl {{ request()->routeIs('users.show') ? 'font-extrabold' : '' }}">プロフィール</span>
             </div>
         </a>
         <a class="h-[50px]" href="#">
