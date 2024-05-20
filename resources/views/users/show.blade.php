@@ -6,9 +6,21 @@
         <x-commons.main-contents :user="$user">
             <x-slot name="contents">
                 <div class="w-full h-[200px] relative">
-                    <img class="size-full object-cover" src="{{ asset('default_header_user.jpg') }}" alt="">
-                    <img class="absolute left-5 -translate-y-1/2 size-[133.5px] bg-white rounded-full border-4 border-black"
-                        src="{{ asset('default_icon_user.png') }}" alt="">
+                    @if (Auth::user()->header()->get()->isEmpty())
+                        <img class="size-full object-cover" src="{{ asset('default_header_user.jpg') }}"
+                            alt="デフォルトユーザーヘッダー">
+                    @else
+                        <img src="{{ asset('storage/user_icons/' . Auth::user()->header()->first()->filename) }}"
+                            alt="ユーザーヘッダー">
+                    @endif
+                    @if (Auth::user()->icon()->get()->isEmpty())
+                        <img class="absolute left-5 -translate-y-1/2 size-[133.5px] bg-white rounded-full border-4 border-black"
+                            src="{{ asset('default_icon_user.png') }}" alt="">
+                    @else
+                        <img class="size-[40px] object-cover rounded-full"
+                            src="{{ asset('storage/user_icons/' . Auth::user()->icon()->first()->filename) }}"
+                            alt="ユーザーアイコン">
+                    @endif
                 </div>
                 <div class="px-5 mb-5">
                     <div class="h-[70px] flex justify-end items-center">
