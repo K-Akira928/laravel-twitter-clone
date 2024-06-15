@@ -84,14 +84,14 @@
                 <span class="text-2xl">コミュニティ</span>
             </div>
         </a>
-        <a class="h-[50px]" href="#">
+        <a class="h-[50px]" href="{{ route('users.show', ['id' => Auth::id()]) }}">
             <div class="h-full w-fit flex items-center gap-x-3 px-5 hover:bg-gray-900 rounded-full transition">
                 <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round"
-                        stroke-width="{{ request()->routeIs('profiles') ? '2' : '1' }}"
+                        stroke-width="{{ request()->routeIs('users.show') ? '2' : '1' }}"
                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
-                <span class="text-2xl {{ request()->routeIs('profiles') ? 'font-extrabold' : '' }}">プロフィール</span>
+                <span class="text-2xl {{ request()->routeIs('users.show') ? 'font-extrabold' : '' }}">プロフィール</span>
             </div>
         </a>
         <a class="h-[50px]" href="#">
@@ -111,10 +111,17 @@
     <div
         class="w-[260px] h-[65px] flex justify-between items-center px-5 mb-4 hover:bg-gray-900 hover:cursor-pointer rounded-full transition">
         <div class="flex items-center gap-x-2">
-            <div class="size-[40px] flex justify-center items-center border rounded-full">IC</div>
+            @if (Auth::user()->icon()->get()->isEmpty())
+                <img class="size-[40px] object-cover rounded-full" src="{{ asset('default_icon_user.png') }}"
+                    alt="デフォルトユーザーアイコン">
+            @else
+                <img class="size-[40px] object-cover rounded-full"
+                    src="{{ asset('storage/user_icons/' . Auth::user()->icon()->first()->filename) }}"
+                    alt="ユーザーアイコン">
+            @endif
             <div>
-                <p class="font-bold">name</p>
-                <span class="text-gray-500">@ユーザー名</span>
+                <p class="font-bold">{{ Auth::user()->name }}</p>
+                <span class="text-gray-500">{{ '@' . Auth::user()->username }}</span>
             </div>
         </div>
         <svg class="size-[20px] text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor"

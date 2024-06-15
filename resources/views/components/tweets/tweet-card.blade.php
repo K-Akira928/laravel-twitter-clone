@@ -4,11 +4,22 @@
     <button onclick="location.href='{{ route('tweets.show', ['id' => $tweet->id]) }}'" type="button"
         class="absolute size-full hover:bg-gray-500 hover:bg-opacity-20 transition top-0 left-0"></button>
     <div class="flex">
-        <img class="size-[40px] object-cover rounded-full" src="{{ asset('icon.svg') }}" alt="">
+        <a class="z-10" href="{{ route('users.show', ['id' => $tweet->user->id]) }}">
+            <div class="size-[40px]">
+                @if (empty($tweet->user->icon))
+                    <img class="size-[40px] object-cover rounded-full" src="{{ asset('default_icon_user.png') }}"
+                        alt="デフォルトユーザーアイコン">
+                @else
+                    <img class="size-full object-cover rounded-full"
+                        src="{{ asset('storage/user_icons/' . $tweet->user->icon()->get()->last()->filename) }}"
+                        alt="ユーザーアイコン">
+                @endif
+            </div>
+        </a>
         <div class="w-full ml-3">
             <div class="w-full flex justify-between">
                 <div>
-                    <a href="#"
+                    <a href="{{ route('users.show', ['id' => $tweet->user->id]) }}"
                         class="font-bold text-lg relative z-10 hover:underline">{{ $tweet->user->name }}</a>
                     <span
                         class="text-gray-500 ml-2 relative z-10 hover:underline hover:cursor-pointer">{{ '@' . $tweet->user->username }}</span>
