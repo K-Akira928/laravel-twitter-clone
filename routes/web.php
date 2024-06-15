@@ -29,6 +29,8 @@ Route::middleware(['auth', 'verified:login'])->group(function () {
     Route::delete('/tweets/{id}', [TweetController::class, 'destroy'])->name('tweets.destroy');
 
     Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
+    Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{id}/update', [UserController::class, 'update'])->name('users.update');
 });
 
 Route::middleware('auth')->group(function () {

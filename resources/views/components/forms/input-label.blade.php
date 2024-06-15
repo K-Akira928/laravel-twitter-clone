@@ -1,4 +1,4 @@
-@props(['value', 'name', 'type' => 'text', 'old' => false])
+@props(['value', 'name', 'type' => 'text', 'initial' => null, 'old' => false])
 
 <div @click="toggle" @click.away="clickAway" x-data="{
     focus: $refs.input.value,
@@ -20,5 +20,5 @@
         for="{{ $name }}">{{ $value }}</label>
     <input x-ref="input" class="w-full bg-inherit outline-none p-2 0 focus:bg-inherit" type="{{ $type }}"
         id="{{ $name }}" name="{{ $name }}"
-        @if ($old) value="{{ old($name) }}" @endif>
+        @if ($old) value="{{ is_null($initial) ? old($name) : $initial }}" @endif>
 </div>

@@ -5,13 +5,16 @@
         class="absolute size-full hover:bg-gray-500 hover:bg-opacity-20 transition top-0 left-0"></button>
     <div class="flex">
         <a class="z-10" href="{{ route('users.show', ['id' => $tweet->user->id]) }}">
-            @if (empty($tweet->user->icon))
-                <img class="size-[40px] object-cover rounded-full" src="{{ asset('default_icon_user.png') }}"
-                    alt="デフォルトユーザーアイコン">
-            @else
-                <img class="size-[40px] object-cover rounded-full"
-                    src="{{ asset('storage/user_icons/' . $tweet->user->icon[0]->filename) }}" alt="ユーザーアイコン">
-            @endif
+            <div class="size-[40px]">
+                @if (empty($tweet->user->icon))
+                    <img class="size-[40px] object-cover rounded-full" src="{{ asset('default_icon_user.png') }}"
+                        alt="デフォルトユーザーアイコン">
+                @else
+                    <img class="size-full object-cover rounded-full"
+                        src="{{ asset('storage/user_icons/' . $tweet->user->icon()->get()->last()->filename) }}"
+                        alt="ユーザーアイコン">
+                @endif
+            </div>
         </a>
         <div class="w-full ml-3">
             <div class="w-full flex justify-between">

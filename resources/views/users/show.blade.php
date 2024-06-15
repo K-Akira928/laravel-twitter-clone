@@ -6,26 +6,28 @@
         <x-commons.main-contents :user="$user">
             <x-slot name="contents">
                 <div class="w-full h-[200px] relative">
-                    @if (Auth::user()->header()->get()->isEmpty())
+                    @if ($user->header()->get()->isEmpty())
                         <img class="size-full object-cover" src="{{ asset('default_header_user.jpg') }}"
                             alt="デフォルトユーザーヘッダー">
                     @else
-                        <img src="{{ asset('storage/user_icons/' . Auth::user()->header()->first()->filename) }}"
+                        <img class="size-full object-cover"
+                            src="{{ asset('storage/user_headers/' . $user->header()->get()->last()->filename) }}"
                             alt="ユーザーヘッダー">
                     @endif
-                    @if (Auth::user()->icon()->get()->isEmpty())
+                    @if ($user->icon()->get()->isEmpty())
                         <img class="absolute left-5 -translate-y-1/2 size-[133.5px] bg-white rounded-full border-4 border-black"
                             src="{{ asset('default_icon_user.png') }}" alt="">
                     @else
-                        <img class="size-[40px] object-cover rounded-full"
-                            src="{{ asset('storage/user_icons/' . Auth::user()->icon()->first()->filename) }}"
+                        <img class="absolute left-5 -translate-y-1/2 size-[133.5px] object-cover rounded-full"
+                            src="{{ asset('storage/user_icons/' . $user->icon()->get()->last()->filename) }}"
                             alt="ユーザーアイコン">
                     @endif
                 </div>
                 <div class="px-5 mb-5">
                     <div class="h-[70px] flex justify-end items-center">
                         @if ((int) request()->route('id') === Auth::id())
-                            <button class="inline-block h-[35px] px-4 border rounded-full">プロフィールを編集</button>
+                            <button onclick="location.href='{{ route('users.edit', ['id' => $user->id]) }}'"
+                                class="inline-block h-[35px] px-4 border rounded-full">プロフィールを編集</button>
                         @endif
                     </div>
                     <p class="text-2xl font-semibold">{{ $user->name }}</p>
