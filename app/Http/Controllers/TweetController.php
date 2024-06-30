@@ -21,7 +21,7 @@ class TweetController extends Controller
 {
     public function index(): View
     {
-        $tweets = Tweet::with(['user', 'user.icon', 'images'])->orderBy('created_at', 'desc')->get();
+        $tweets = Tweet::with(['user', 'user.icon', 'user.followers', 'images'])->orderBy('created_at', 'desc')->get();
 
         return view('home', compact('tweets'));
     }
