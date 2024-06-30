@@ -43,6 +43,19 @@
                                 <button class="text-red-500 font-bold w-full">削除</button>
                             </form>
                         @endif
+                        @if ($tweet->user->followers()->get()->contains(Auth::user()))
+                            <form method="POST" action={{ route('follows.destroy', ['id' => $tweet->user->id]) }}>
+                                @csrf
+                                @method('DELETE')
+                                <button class="w-full">{{ $tweet->user->name . 'のフォローを解除' }}</button>
+                            </form>
+                        @elseif ($tweet->user->id !== Auth::id())
+                            <form method="POST"
+                                action="{{ route('follows.store', ['followed_id' => $tweet->user->id]) }}">
+                                @csrf
+                                <button class="w-full">{{ $tweet->user->name . 'をフォロー' }}</button>
+                            </form>
+                        @endif
                     </div>
                 </div>
             </div>
