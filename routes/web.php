@@ -34,6 +34,7 @@ Route::middleware(['auth', 'verified:login'])->group(function () {
     Route::put('/users/{id}/update', [UserController::class, 'update'])->name('users.update');
 
     Route::post('/follows', [FollowController::class, 'store'])->name('follows.store');
+    Route::delete('/follows/{id}', [FollowController::class, 'destroy'])->name('follows.destroy');
 });
 
 Route::middleware('auth')->group(function () {

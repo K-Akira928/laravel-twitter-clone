@@ -20,4 +20,11 @@ class FollowController extends Controller
         return redirect()->route('home');
     }
 
+    public function destroy(string $id)
+    {
+        $follow = Follow::where('followed_id', $id)->where('follower_id', Auth::id())->first();
+        $follow->delete();
+
+        return redirect()->route('home');
+    }
 }
