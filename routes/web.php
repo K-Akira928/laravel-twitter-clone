@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TweetController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FollowController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,9 @@ Route::middleware(['auth', 'verified:login'])->group(function () {
     Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
     Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::put('/users/{id}/update', [UserController::class, 'update'])->name('users.update');
+
+    Route::post('/follows', [FollowController::class, 'store'])->name('follows.store');
+    Route::delete('/follows/{id}', [FollowController::class, 'destroy'])->name('follows.destroy');
 });
 
 Route::middleware('auth')->group(function () {
